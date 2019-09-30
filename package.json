@@ -1,0 +1,67 @@
+{
+    "name": "ExternalDashboardWithLWCOSS",
+    "description": "External Dashboard that shows realtime SF data built with https://lwc.dev",
+    "version": "0.0.0",
+    "author": "Kevin Poorman",
+    "bugs": "https://github.com/sfcodelive/ExternalDashboardWithLWCOSS/issues",
+    "dependencies": {
+        "lwc-services": "^1.3.0"
+    },
+    "devDependencies": {
+        "husky": "^3.0.7",
+        "lint-staged": "^9.4.0",
+        "npm-run-all": "^4.1.5"
+    },
+    "engines": {
+        "node": ">=10.0.0 <11.0.0"
+    },
+    "homepage": "https://github.com/sfcodelive/ExternalDashboardWithLWCOSS",
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "keywords": [
+        "lwc"
+    ],
+    "license": "MIT",
+    "lint-staged": {
+        "**/*.{css,html,js,json,md,ts,yaml,yml}": [
+            "prettier --write"
+        ],
+        "./src/**/*.js": [
+            "eslint"
+        ],
+        "*": [
+            "git add"
+        ]
+    },
+    "nodemonConfig": {
+        "watch": [
+            "src/server/**/*.js",
+            "scripts/express-dev.js"
+        ],
+        "ext": "js",
+        "ignore": [
+            "src/**/*.spec.js",
+            "src/**/*.test.js"
+        ],
+        "exec": "node ./scripts/express-dev.js"
+    },
+    "repository": "sfcodelive/ExternalDashboardWithLWCOSS",
+    "scripts": {
+        "build": "lwc-services build -m production",
+        "build:development": "lwc-services build",
+        "lint": "eslint ./src/**/*.js",
+        "prettier": "prettier --write '**/*.{css,html,js,json,md,ts,yaml,yml}'",
+        "prettier:verify": "prettier --list-different '**/*.{css,html,js,json,md,ts,yaml,yml}'",
+        "serve": "lwc-services serve",
+        "test:unit": "lwc-services test:unit",
+        "test:unit:coverage": "lwc-services test:unit --coverage",
+        "test:unit:debug": "lwc-services test:unit --debug",
+        "test:unit:watch": "lwc-services test:unit --watch",
+        "watch": "run-p watch:client watch:server",
+        "watch:client": "lwc-services watch",
+        "watch:server": "nodemon"
+    }
+}
