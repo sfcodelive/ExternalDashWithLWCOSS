@@ -23,7 +23,7 @@ export default class App extends LightningElement {
                 console.log(data);
             });
 
-            this.socket.on('cdc', (data) => {
+            this.socket.on('cdc', data => {
                 console.log('cdc event', data);
                 const { changeType, entityName } = data.ChangeEventHeader;
 

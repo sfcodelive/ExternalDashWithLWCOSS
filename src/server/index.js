@@ -9,15 +9,12 @@ const jsforce = require('jsforce');
 const PORT = 3002;
 const CHANNEL = '/data/ChangeEvents';
 
-const {
-    SF_USERNAME,
-    SF_PASSWORD,
-    SF_TOKEN,
-    SF_LOGIN_URL
-} = process.env;
+const { SF_USERNAME, SF_PASSWORD, SF_TOKEN, SF_LOGIN_URL } = process.env;
 
 if (!(SF_USERNAME && SF_PASSWORD && SF_TOKEN && SF_LOGIN_URL)) {
-    console.error('Cannot start app: missing mandatory configuration. Check your .env file.');
+    console.error(
+        'Cannot start app: missing mandatory configuration. Check your .env file.'
+    );
     process.exit(-1);
 }
 
@@ -35,7 +32,9 @@ conn.login(SF_USERNAME, SF_PASSWORD + SF_TOKEN, err => {
     conn.streaming.topic(CHANNEL).subscribe(data => {
         const { event, payload } = data;
         const { entityName, changeType } = payload.ChangeEventHeader;
-        console.log(`cdc message received [${event.replayId}]: ${entityName}:${changeType}`);
+        console.log(
+            `cdc message received [${event.replayId}]: ${entityName}:${changeType}`
+        );
         io.emit(`cdc`, payload);
     });
 
@@ -48,7 +47,7 @@ conn.login(SF_USERNAME, SF_PASSWORD + SF_TOKEN, err => {
 });
 
 // log out when a client connects
-io.on('connection', (socket) => {
+io.on('connection', socket => {
     console.log(`client connected: ${socket.id}`);
 });
 
