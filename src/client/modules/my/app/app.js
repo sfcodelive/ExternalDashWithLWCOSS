@@ -1,5 +1,4 @@
 import { LightningElement, track } from 'lwc';
-import io from 'socket.io-client';
 
 export default class App extends LightningElement {
     socket;
@@ -8,9 +7,9 @@ export default class App extends LightningElement {
         this.initializeSocketIO();
     }
 
-    initializeSocketIO() {
-        this.socket = io('http://0.0.0.0:3002');
-        console.log('foo');
+    async initializeSocketIO() {
+        const io          = await require('socket.io-client');
+              this.socket = io('http://0.0.0.0:3002');
         this.socket.on('connect', socket => {
             console.log('connected!');
 
