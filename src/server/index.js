@@ -9,12 +9,7 @@ const jsforce = require('jsforce');
 const PORT = 3002;
 const CHANNEL = '/data/ChangeEvents';
 
-const {
-    SF_USERNAME,
-    SF_PASSWORD,
-    SF_TOKEN,
-    SF_LOGIN_URL
-} = process.env;
+const { SF_USERNAME, SF_PASSWORD, SF_TOKEN, SF_LOGIN_URL } = process.env;
 
 if (!(SF_USERNAME && SF_PASSWORD && SF_TOKEN && SF_LOGIN_URL)) {
     console.error(
@@ -35,21 +30,15 @@ conn.login(SF_USERNAME, SF_PASSWORD + SF_TOKEN, err => {
 
     console.log('subscribing to channel: ' + CHANNEL);
     conn.streaming.topic(CHANNEL).subscribe(data => {
-        const {
-            event,
-            payload
-        } = data;
-        const {
-            entityName,
-            changeType
-        } = payload.ChangeEventHeader;
+        const { event, payload } = data;
+        const { entityName, changeType } = payload.ChangeEventHeader;
         console.log(
             `cdc message received [${event.replayId}]: ${entityName}:${changeType}`
         );
         io.emit(`cdc`, payload);
     });
 
-    conn.streaming.topic('CaseUpdates').subscribe(function (message) {
+    conn.streaming.topic('CaseUpdates').subscribe(function(message) {
         console.log('Event Type : ' + message.event.type);
         console.log('Event Created : ' + message.event.createdDate);
         console.log('Object Id : ' + message.sobject.Id);
