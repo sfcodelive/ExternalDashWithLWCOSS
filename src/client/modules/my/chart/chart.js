@@ -1,6 +1,7 @@
-import { LightningElement, api, track } from 'lwc';
+import LightningElementWithSLDS from '../../../lib/lightningElementWithSLDS.js';
+import { api, track } from 'lwc';
 
-export default class Chart extends LightningElement {
+export default class Chart extends LightningElementWithSLDS {
   @api sobject = '';
   @api socket;
   @api chartType = 'doughnut';

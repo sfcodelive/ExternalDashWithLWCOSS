@@ -1,6 +1,7 @@
-import { LightningElement, track } from 'lwc';
+import LightningElementWithSLDS from '../../../lib/lightningElementWithSLDS.js';
+import { track } from 'lwc';
 
-export default class App extends LightningElement {
+export default class App extends LightningElementWithSLDS {
   @track socket;
   @track cdcEvents = 0;
   @track socketReady = false;
