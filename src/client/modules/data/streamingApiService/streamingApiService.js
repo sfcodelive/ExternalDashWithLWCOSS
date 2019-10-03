@@ -1,5 +1,5 @@
 export const getCaseData = () => {
-    /*
+  /*
   ! Kevin, the TH pattern has this module defining a function that hits an /api/* endpoint defined in server/index.js
   ! Not sure if we need to do that for the streaming api? Individual components then hit the function defined here to 
   ! get and transform the data into something usable. Because the streaming api is going to setup a persistent 

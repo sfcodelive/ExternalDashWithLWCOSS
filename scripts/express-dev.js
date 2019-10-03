@@ -8,6 +8,6 @@ const app = express();
 customServer(app);
 
 app.listen(3002, () => {
-    // eslint-disable-next-line no-console
-    console.log('Yay, local server started');
+  // eslint-disable-next-line no-console
+  console.log('Yay, local server started');
 });
