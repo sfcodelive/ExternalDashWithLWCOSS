@@ -3,7 +3,7 @@ import { LightningElement, api, track } from 'lwc';
 export default class Chart extends LightningElement {
   @api sobject = '';
   @api socket;
-  @api chartType = 'doughnut';
+  @api charttype = 'doughnut';
 
   @track events = 0;
   @track socketInitialized = false;
@@ -69,7 +69,7 @@ export default class Chart extends LightningElement {
 
   getInitialChartConfig() {
     return {
-      type: this.chartType,
+      type: this.charttype,
       data: {
         datasets: [
           {
