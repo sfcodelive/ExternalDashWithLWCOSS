@@ -12,6 +12,7 @@
     "socket.io-client": "^2.3.0"
   },
   "devDependencies": {
+    "@salesforce-ux/design-system": "^2.10.0",
     "@salesforce/eslint-config-lwc": "^0.4.0",
     "chart.js": "^2.8.0",
     "husky": "^3.0.7",
