@@ -1,0 +1,6 @@
+.chart {
+  padding: 10px;
+  margin: 10px auto;
+  border: 2px solid rgb(24, 24, 24);
+  max-width: 800px;
+}

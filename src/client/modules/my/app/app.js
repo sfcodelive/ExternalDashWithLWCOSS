@@ -1,21 +1,35 @@
-import { LightningElement, track } from 'lwc';
+import LightningElementWithSLDS from '../../../lib/lightningElementWithSLDS.js';
+import { track } from 'lwc';
 
-export default class App extends LightningElement {
-    socket;
+export default class App extends LightningElementWithSLDS {
+  @track socket;
+  @track cdcEvents = 0;
+  @track socketReady = false;
 
-    connectedCallback() {
-        this.initializeSocketIO();
-    }
+  connectedCallback() {
+    this.openSocket();
+  }
 
-    async initializeSocketIO() {
-        const io          = await require('socket.io-client');
-              this.socket = io('http://0.0.0.0:3002');
-        this.socket.on('connect', socket => {
-            console.log('connected!');
+  disconnectedCallback() {
+    this.closeSocket();
+  }
 
-            this.socket.on('newCaseInfo', data => {
-                console.log(data);
-            });
-        });
-    }
+  async openSocket() {
+    const io = await require('socket.io-client');
+    this.socket = io('http://0.0.0.0:3002');
+    this.socket.on('connect', () => {
+      console.log('connected!');
+      this.socketReady = true;
+
+      this.socket.on('cdc', data => {
+        console.log('cdc event', data);
+        this.cdcEvents++;
+      });
+    });
+  }
+
+  async closeSocket() {
+    this.socket.close();
+    this.socket = null;
+  }
 }

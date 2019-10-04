@@ -10,40 +10,40 @@ import { createElement } from 'lwc';
 import MyGreeting from 'my/greeting';
 
 describe('my-greeting', () => {
-    afterEach(() => {
-        // The jsdom instance is shared across test cases in a single file so reset the DOM
-        while (document.body.firstChild) {
-            document.body.removeChild(document.body.firstChild);
-        }
+  afterEach(() => {
+    // The jsdom instance is shared across test cases in a single file so reset the DOM
+    while (document.body.firstChild) {
+      document.body.removeChild(document.body.firstChild);
+    }
+  });
+
+  it('contains a div that controls animation.', () => {
+    const SPEED_CLASS_VALUES = ['fade-slow', 'fade-fast', 'fade-medium'];
+
+    const element = createElement('my-greeting', {
+      is: MyGreeting
     });
+    document.body.appendChild(element);
 
-    it('contains a div that controls animation.', () => {
-        const SPEED_CLASS_VALUES = ['fade-slow', 'fade-fast', 'fade-medium'];
+    // Get div element
+    const divEl = element.shadowRoot.querySelector('div');
 
-        const element = createElement('my-greeting', {
-            is: MyGreeting
-        });
-        document.body.appendChild(element);
+    expect(SPEED_CLASS_VALUES.indexOf(divEl.className)).toBeGreaterThanOrEqual(
+      0
+    );
+  });
 
-        // Get div element
-        const divEl = element.shadowRoot.querySelector('div');
+  it('contains a span tag that displays the greeting message.', () => {
+    const INITIAL_GREETING = 'Hello';
 
-        expect(
-            SPEED_CLASS_VALUES.indexOf(divEl.className)
-        ).toBeGreaterThanOrEqual(0);
+    const element = createElement('my-greeting', {
+      is: MyGreeting
     });
+    document.body.appendChild(element);
 
-    it('contains a span tag that displays the greeting message.', () => {
-        const INITIAL_GREETING = 'Hello';
+    // Get span element
+    const spanEl = element.shadowRoot.querySelector('span');
 
-        const element = createElement('my-greeting', {
-            is: MyGreeting
-        });
-        document.body.appendChild(element);
-
-        // Get span element
-        const spanEl = element.shadowRoot.querySelector('span');
-
-        expect(spanEl.textContent).toBe(INITIAL_GREETING);
-    });
+    expect(spanEl.textContent).toBe(INITIAL_GREETING);
+  });
 });
