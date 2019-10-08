@@ -3,7 +3,7 @@
 Welcome to Codetober!
 
 Last week Kevin O'Hara and I kicked off #Codetober, a month long series of weekly #codeLive events. Kevin's a Javascript / Node development expert and I thought it'd be fun to work with him on building something with Lightning Web Components OSS. Yes, you read that right. If you've not heard, Lightning Web Components are open source! You can find out all about them here at https://lwc.dev (https://lwc.dev/) and you can catch the recording of the stream here (https://developer.salesforce.com/event/Dashboard-w-lwc). Over the course of the hour we accomplished quite a lot, but let's eat our desert first, and look at our end-product.
-![Image: Overview][https://github.com/sfcodelive/externaldashwithlwcoss/blob/master/images/overviewimage.png]
+![Image: Overview](https://github.com/sfcodelive/externaldashwithlwcoss/blob/master/images/overviewimage.png)
 Our app displays a dashboard that displays the number, and type of Change Data Capture events that have occurred. For our example, we just recorded the field(s) changed, and the number of CDC events.
 
 Before we started
