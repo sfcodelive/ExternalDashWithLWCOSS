@@ -1,6 +1,4 @@
-import {
-  LightningElement
-} from "lwc";
+import { LightningElement } from "lwc";
 
 export default class LightningElementSLDS extends LightningElement {
   constructor() {
